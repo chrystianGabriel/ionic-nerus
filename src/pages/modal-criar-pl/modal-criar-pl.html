@@ -1,0 +1,57 @@
+<!--
+  Generated template for the ModalCriarPL page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-item color="dark">
+      <button end item-left ion-button clear large><ion-icon name="arrow-back" color="nerus"></ion-icon></button>
+      <ion-title item-right>
+        <ion-label color="nerus"><h1>Cadastrar PlayList</h1></ion-label>
+      </ion-title>
+    </ion-item>
+
+</ion-navbar>
+</ion-header>
+
+<ion-content padding id="pageBackColor">
+  <ion-card>
+    <ion-item color="dark">
+      <ion-label color="nerus">Nome</ion-label>
+      <ion-input placeholder="Nome Da PlayList" [(ngModel)]="nome"></ion-input>
+    </ion-item>
+<ion-item color="dark">
+  <ion-label color="nerus">Horario de termino</ion-label>
+      <ion-datetime displayFormat = "HH:mm" [(ngModel)] = "horaDeParada"></ion-datetime>
+</ion-item>
+
+ <ion-item color="dark">
+   <ion-label color="nerus">Intervalo de reprodução</ion-label>
+   <ion-badge color = "ON" item-right>{{intervalo}} min</ion-badge>
+ </ion-item>
+
+   <ion-item color="dark">
+       <ion-range min="15" max="40" color="nerus" [(ngModel)]="intervalo">
+          <ion-label range-left color="grey">15</ion-label>
+          <ion-label range-right color="grey">40</ion-label>
+       </ion-range>
+  </ion-item>
+
+    <ion-item color="dark">
+      <ion-label color="nerus" id="alignCenter">Codigo de Play List</ion-label>
+    </ion-item>
+
+  <ion-item color="dark">
+    <ion-label color="secondary" id="alignCenter">{{playList.getCodigo()}}</ion-label>
+  </ion-item>
+</ion-card>
+
+<button ion-button full color="dark" (click)="cadastrarAudios()">
+  <ion-label color="nerus">Adicionar Audios</ion-label>
+</button>
+<button ion-button full color="dark" (click)="salvarPlayList(nome,horaDeParada,intervalo)">
+  <ion-label color="nerus">Salvar PlayList</ion-label>
+</button>
+</ion-content>

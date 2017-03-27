@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>
+      <ion-item color="dark">
+        <button ion-button large item-left (click)="dowloadAudios()" color="dark"><ion-icon name="cloud" color ="nerus" item-left large></ion-icon></button>
+        <ion-label color="nerus" id="alignCenter"><h1>DROPBOX</h1></ion-label>
+      </ion-item>
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button *ngIf="depth" (click)="goBack()"><ion-icon name="arrow-back" color="nerus"></ion-icon>Back</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content id="pageBackColor">
+  <ion-list>
+    <div *ngFor="let folder of folders">
+      <ion-item *ngIf="folder['.tag'] == 'folder'" detail-push (click)="openFolder(folder.path_lower)" color="dark">
+          <ion-label color="grey">{{folder.name}}</ion-label>
+          <ion-icon name="folder" item-left color="secondary"></ion-icon>
+
+      </ion-item>
+
+      <ion-item *ngIf="folder['.tag'] == 'file'" color="dark">
+
+        <ion-label color="grey">{{folder.name}}</ion-label>
+        <ion-icon name="musical-note" item-left color="secondary"></ion-icon>
+        <ion-checkbox item-right color="nerus" (click)="selectAudios(folder.name,folder.path_lower)"></ion-checkbox>
+
+      </ion-item>
+    </div>
+  </ion-list>
+
+</ion-content>

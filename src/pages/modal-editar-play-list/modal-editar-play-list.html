@@ -1,0 +1,57 @@
+<!--
+  Generated template for the ModalEditarPlayList page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="dark">
+  <ion-item color="dark">
+    <ion-label id="alignCenter" color="nerus"><h1><b>EDITAR PLAYLIST</b></h1></ion-label>
+    <button ion-button item-left large clear>
+      <ion-icon name="arrow-back" color="nerus"></ion-icon>
+    </button>
+  </ion-item>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content id="pageBackColor">
+  <ion-card color="dark">
+      <ion-card-header color="dark">
+
+          <ion-item color="dark">
+            <ion-label color="nerus">Nome</ion-label>
+            <ion-input placeholder="Nome Da PlayList"></ion-input>
+          </ion-item>
+          <ion-label id="Divisao">-</ion-label>
+
+        <ion-item color="dark">
+          <ion-label color="nerus">Horario de termino</ion-label>
+              <ion-datetime displayFormat = "HH:mm"></ion-datetime>
+        </ion-item>
+      <ion-label id="Divisao">-</ion-label>
+
+       <ion-item color="dark">
+         <ion-label color="nerus">Intervalo de reprodução</ion-label>
+         <ion-badge color = "ON" item-right>10 min</ion-badge>
+         <ion-range></ion-range>
+       </ion-item>
+       <ion-label id="Divisao">-</ion-label>
+    </ion-card-header>
+    <ion-card-content color="dark">
+          <ion-list>
+              <ion-item color = "dark">
+                <ion-icon name ="mic" item-left color="ON"></ion-icon>
+                <ion-label color="grey" id="alignCenter">Audio 1.mp3</ion-label>
+                <button ion-button item-right color="nerus">
+                  <ion-icon name="trash" color="dark"></ion-icon>
+                </button>
+                <ion-checkbox item-right color="nerus"></ion-checkbox>
+              </ion-item>
+          </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

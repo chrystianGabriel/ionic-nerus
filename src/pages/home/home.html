@@ -1,0 +1,68 @@
+
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-item color="dark">
+      <ion-label color="nerus" id="alignCenter"><h1>Nerus Eventos</h1></ion-label>
+      <button ion-button item-left clear large (click)="modalPlayListCasdastradas()">
+        <ion-icon name="menu" color="nerus">
+        </ion-icon>
+      </button>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding id="pageBackColor">
+  <ion-fab right bottom>
+    <button ion-fab color="nerus" (click)="modalCadastrarPlayList()">
+      <ion-icon name="add" color="dark">
+      </ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-card color="dark" *ngIf="playList">
+    <ion-card-header>
+        <ion-item color="dark">
+          <ion-label color="nerus">{{playList.getNome()}}</ion-label>
+          <ion-icon name="musical-notes" item-left color="ON"></ion-icon>
+          <button ion-button item-right color="nerus" (click)="modalDropBox()">
+            <ion-icon name="mic" color="dark"></ion-icon>
+          </button>
+          <button ion-button color="nerus" item-right>
+              <ion-icon name="settings" color="dark"></ion-icon>
+          </button>
+        </ion-item>
+        <ion-label id="Divisao">-</ion-label>
+    </ion-card-header>
+
+    <ion-card-content *ngIf="audios.length > 0">
+          <ion-list *ngFor = "let audio of audios">
+
+                <ion-item color="AUColor" border>
+                  <ion-icon name="play" color="ON" item-left></ion-icon>
+
+
+                  <ion-label>{{audio.getNome()}}</ion-label>
+
+                  <button ion-button item-right color="nerusOP">
+                    <ion-icon name="clock" color="dark"></ion-icon>
+                  </button>
+
+                  <button ion-button item-right color="nerusOP" (click)="removerAudio(audio.getNome())">
+                    <ion-icon name="trash" color="dark"></ion-icon>
+                  </button>
+                </ion-item>
+          </ion-list>
+      </ion-card-content>
+      <ion-card-header color="dark">
+          <ion-label id="Divisao">-</ion-label>
+        <ion-item color="dark">
+          <ion-label color="secondary" id="alignCenter">{{playList.getCodigo()}}</ion-label>
+        </ion-item>
+        <button ion-button color="nerusOP" full item-right (click)="gerarNovoCodigo()">
+            <ion-icon name="refresh"></ion-icon>
+        </button>
+
+      </ion-card-header>
+  </ion-card>
+
+</ion-content>
