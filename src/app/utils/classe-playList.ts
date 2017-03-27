@@ -28,6 +28,10 @@ export class PlayList{
     }
   }
 
+  public setCodigo(codigo:number){
+    this.codigo = codigo;
+  }
+
   public setIntervaloDeRepeticao(intervalo:number){
     this.intervaloDeRepeticao = intervalo;
 

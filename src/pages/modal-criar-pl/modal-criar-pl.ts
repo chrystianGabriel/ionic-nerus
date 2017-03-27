@@ -33,6 +33,8 @@ export class ModalCriarPLPage {
     modal.onDidDismiss(data =>{
       if(data){
         this.insertAudios(data);
+        alert(this.playList.getAudios()[0].getIntervalo());
+
       }
     });
     modal.present();

@@ -22,14 +22,28 @@
      <ion-label id="Divisao">-</ion-label>
     </ion-card-header>
     <ion-card-content color = "dark">
-      <ion-list *ngFor = "let audio of audios">
-          <ion-item color = "dark">
-            <ion-icon name = "mic" item-left color="ON"></ion-icon>
-            <ion-label color="grey" id="alignCenter">{{audio.nome}}</ion-label>
-            <button ion-button item-right color="nerus" (click)="removerAudio(audio.getNome())"><ion-icon name="trash" color="dark"></ion-icon></button>
-            <ion-checkbox color="nerus" item-right (click)="setAudioMestre(audio)"></ion-checkbox>
-          </ion-item>
-      </ion-list>
+    <ion-slides>
+      <ion-slide>
+        <ion-list *ngFor = "let audio of audios">
+            <ion-item color = "dark">
+              <ion-icon name = "mic" item-left color="ON"></ion-icon>
+              <ion-label color="grey" id="alignCenter">{{audio.getNome()}}</ion-label>
+              <button ion-button item-right color="nerus" (click)="removerAudio(audio.getNome())"><ion-icon name="trash" color="dark"></ion-icon></button>
+              <ion-toggle color="nerus" item-right (click)="setAudioMestre(audio)"></ion-toggle>
+            </ion-item>
+        </ion-list>
+          <ion-label color="nerus"><b>Arraste para Editar Intervalo</b></ion-label>
+      </ion-slide>
+      <ion-slide>
+        <ion-label color="nerus" *ngIf="audios.length == 0">Nenhum audio adicionado</ion-label>
+          <ion-list *ngFor = "let audio of audios">
+            <ion-item color = "dark">
+              <ion-range pin="true" color="nerus"  min = "0" max = "900"[(ngModel)]="audio.intervalo"></ion-range>
+              <ion-label color="ON" stacked>{{audio.getNome()}}</ion-label>
+            </ion-item>
+          </ion-list>
+      </ion-slide>
+    </ion-slides>
     </ion-card-content>
   </ion-card>
     <button ion-button item-right color="dark" full large (click)="getAudios()">

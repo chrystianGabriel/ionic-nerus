@@ -7,7 +7,7 @@ export class Audios{
     constructor(){
       this.nome = "";
       this.path = "";
-      this.intervalo = 15;
+      this.intervalo = 0;
     }
 
 //sets

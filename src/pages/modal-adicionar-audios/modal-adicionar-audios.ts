@@ -11,6 +11,8 @@ export class ModalAdicionarAudiosPage {
   private audios:Array<Audios>;
   constructor(public toastCtrl:ToastController,public navParams: NavParams,public modalCtrl:ModalController,public viewCtrl:ViewController,public alertCtrl:AlertController) {
       this.audios = new Array<Audios>();
+
+
   }
 
   getAudios(){
@@ -20,6 +22,7 @@ export class ModalAdicionarAudiosPage {
           for(let i = 0; i<data.length;i++){
             this.audios.push(data[i]);
           }
+          alert(this.audios[0].getIntervalo());
         }
       });
       modal.present();

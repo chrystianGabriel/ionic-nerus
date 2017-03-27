@@ -5,6 +5,7 @@ import {ModalPlaylitsCadastradasPage} from '../modal-playlits-cadastradas/modal-
 import {PlayList} from '../../app/utils/classe-playList';
 import {Audios} from '../../app/utils/interface-audios';
 import {ModalDropBoxPage} from '../modal-drop-box/modal-drop-box';
+import {ModalEditarPlayListPage} from '../modal-editar-play-list/modal-editar-play-list';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -45,6 +46,20 @@ export class HomePage {
     });
     modal.present();
   }
+
+  ModalEditarPlayList(){
+    let modal = this.modalCtrl.create(ModalEditarPlayListPage,this.playList);
+    modal.onDidDismiss((data)=> {
+      if(data){
+        alert(data.getNome());
+        this.playList.setNome(data.getNome());
+        this.playList.setTempo(data.getTempo());
+        this.playList.setIntervaloDeRepeticao(data.getIntervaloDeRepeticao());
+      }
+    });
+    modal.present();
+  }
+
   gerarNovoCodigo(){
     this.playList.gerarCodigo();
   }
