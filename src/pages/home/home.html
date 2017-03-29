@@ -37,15 +37,15 @@
     <ion-card-content *ngIf="audios.length > 0">
       <ion-slides>
         <ion-slide>
-          <ion-list *ngFor = "let audio of audios">
-              <ion-item color = "dark">
-                <ion-icon name = "mic" item-left color="ON"></ion-icon>
-                <ion-label color="grey" id="alignCenter">{{audio.getNome()}}</ion-label>
-                <button ion-button item-right color="nerus" (click)="removerAudio(audio.getNome())"><ion-icon name="trash" color="dark"></ion-icon></button>
-                <ion-toggle color="nerus" item-right (click)="setAudioMestre(audio)"></ion-toggle>
-              </ion-item>
-          </ion-list>
+          <ion-item-group reorder="true" (ionItemReorder)="mudarOrdem($event)">
+            <ion-item color = "dark" *ngFor = "let audio of audios">
+              <ion-label color="grey">{{audio.getNome()}}</ion-label>
+              <button ion-button item-right color="nerus" (click)="removerAudio(audio.getNome())"><ion-icon name="trash" color="dark"></ion-icon></button>
+              <ion-toggle color="nerus" item-right (click)="setAudioMestre(audio)"></ion-toggle>
+            </ion-item>
+          </ion-item-group>
             <ion-label color="nerus"><b>Arraste para Editar Intervalo</b></ion-label>
+
         </ion-slide>
         <ion-slide>
           <ion-label color="nerus" *ngIf="audios.length == 0">Nenhum audio adicionado</ion-label>

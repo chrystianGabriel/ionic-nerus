@@ -22,7 +22,6 @@ export class ModalAdicionarAudiosPage {
           for(let i = 0; i<data.length;i++){
             this.audios.push(data[i]);
           }
-          alert(this.audios[0].getIntervalo());
         }
       });
       modal.present();
@@ -51,10 +50,54 @@ export class ModalAdicionarAudiosPage {
     }
     toastE.present();
     audio.setMestre(true);
+    this.setintervaloMestre(audio);
     return;
 
   }
 
+  setintervaloMestre(audio:Audios) {
+    let alert = this.alertCtrl.create({
+  title: 'Intervalo de Reprodução',
+  inputs:[
+      {
+        name: 'intervalo',
+        placeholder: 'Intervalo de Reprodução'
+      }],
+  buttons: [{
+    text: 'Ok',
+    handler: (data) => {
+      let isDigit = Number(data['intervalo']);
+      if(!isNaN(isDigit)){
+        audio.setIntervalo(data['intervalo']);
+        let toast = this.toastCtrl.create({
+          message:"Intervalo de Reprodução adicionado",
+          duration:1500,
+          position:'top'});
+          toast.present();
+
+      }else{
+        audio.setIntervalo(2);
+        let toast = this.toastCtrl.create({
+          message:"Intervalo de Reprodução adicionado igual a 2",
+          duration:1500,
+          position:'top'});
+          toast.present();
+      }
+
+    }
+  }]
+});
+
+alert.present();
+  }
+
+mudarOrdem(indexes){
+  let element = this.audios[indexes.from];
+  this.audios.splice(indexes.from, 1);
+  this.audios.splice(indexes.to, 0, element);
+
+
+  }
 
 
 }
