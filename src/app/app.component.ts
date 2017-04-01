@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { HomePage } from '../pages/home/home';
-import {ModalEditarPlayListPage} from '../pages/modal-editar-play-list/modal-editar-play-list';
+import {ModalAdicionarAudiosPage} from '../pages/modal-adicionar-audios/modal-adicionar-audios';
 
 @Component({
   templateUrl: 'app.html'

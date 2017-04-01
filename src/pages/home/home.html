@@ -2,7 +2,7 @@
 <ion-header>
   <ion-toolbar color="dark">
     <ion-item color="dark">
-      <ion-label color="nerus" id="alignCenter"><h1>Nerus Eventos</h1></ion-label>
+      <ion-label color="nerus" id="alignCenter"><h1>Nerus</h1></ion-label>
       <button ion-button item-left clear large (click)="modalPlayListCasdastradas()">
         <ion-icon name="menu" color="nerus">
         </ion-icon>
@@ -12,62 +12,87 @@
 </ion-header>
 
 <ion-content padding id="pageBackColor">
-  <ion-fab right bottom>
-    <button ion-fab color="nerus" (click)="modalCadastrarPlayList()">
-      <ion-icon name="add" color="dark">
-      </ion-icon>
-    </button>
-  </ion-fab>
 
   <ion-card color="dark" *ngIf="playList">
     <ion-card-header>
         <ion-item color="dark">
           <ion-label color="nerus">{{playList.getNome()}}</ion-label>
           <ion-icon name="musical-notes" item-left color="ON"></ion-icon>
-          <button ion-button item-right color="nerus" (click)="modalDropBox()">
-            <ion-icon name="mic" color="dark"></ion-icon>
-          </button>
           <button ion-button color="nerus" item-right (click)="ModalEditarPlayList()">
               <ion-icon name="settings" color="dark"></ion-icon>
           </button>
         </ion-item>
         <ion-label id="Divisao">-</ion-label>
+        <ion-segment [(ngModel)]="opAudios">
+
+          <ion-segment-button value="check">
+            <ion-icon name="checkmark-circle" color="ON"></ion-icon>
+          </ion-segment-button>
+
+          <ion-segment-button value="ordem">
+            <ion-icon name="reorder" color="ON"></ion-icon>
+          </ion-segment-button>
+
+          <ion-segment-button value="intervalo">
+            <ion-icon name="pulse" color="ON"></ion-icon>
+          </ion-segment-button>
+
+          <ion-segment-button value="dropbox" (click)="modalDropBox()">
+            <ion-icon name="logo-dropbox" color="ON"></ion-icon>
+          </ion-segment-button>
+
+        </ion-segment>
     </ion-card-header>
 
-    <ion-card-content *ngIf="audios.length > 0">
-      <ion-slides>
-        <ion-slide>
-          <ion-item-group reorder="true" (ionItemReorder)="mudarOrdem($event)">
-            <ion-item color = "dark" *ngFor = "let audio of audios">
-              <ion-label color="grey">{{audio.getNome()}}</ion-label>
-              <button ion-button item-right color="nerus" (click)="removerAudio(audio.getNome())"><ion-icon name="trash" color="dark"></ion-icon></button>
-              <ion-toggle color="nerus" item-right (click)="setAudioMestre(audio)"></ion-toggle>
-            </ion-item>
-          </ion-item-group>
-            <ion-label color="nerus"><b>Arraste para Editar Intervalo</b></ion-label>
-
-        </ion-slide>
-        <ion-slide>
-          <ion-label color="nerus" *ngIf="audios.length == 0">Nenhum audio adicionado</ion-label>
-            <ion-list *ngFor = "let audio of audios">
-              <ion-item color = "dark">
-                <ion-range pin="true" color="nerus"  min = "0" max = "900"[(ngModel)]="audio.intervalo"></ion-range>
-                <ion-label color="ON" stacked>{{audio.getNome()}}</ion-label>
-              </ion-item>
+    <ion-card-content [ngSwitch]="opAudios">
+        <div *ngSwitchCase="'check'">
+            <ion-label color="nerus" *ngIf="audios.length ==0"> Nenhum audio adicionado</ion-label>
+            <ion-list *ngFor="let audio of audios">
+                <ion-item color="dark">
+                  <ion-label color="grey">
+                    {{audio.getNome()}}
+                  </ion-label>
+                </ion-item>
             </ion-list>
-        </ion-slide>
-      </ion-slides>
-      </ion-card-content>
-      <ion-card-header color="dark">
-          <ion-label id="Divisao">-</ion-label>
-        <ion-item color="dark">
-          <ion-label color="secondary" id="alignCenter">{{playList.getCodigo()}}</ion-label>
-        </ion-item>
-        <button ion-button color="nerusOP" full item-right (click)="gerarNovoCodigo()">
-            <ion-icon name="refresh"></ion-icon>
-        </button>
+        </div>
 
-      </ion-card-header>
+        <div *ngSwitchCase = "'ordem'">
+          <ion-label color="nerus" *ngIf="audios.length ==0"> Nenhum audio adicionado</ion-label>
+          <ion-list>
+            <ion-item-group reorder="true" (ionItemReorder)="mudarOrdem($event)">
+                <ion-item color="dark" *ngFor="let audio of audios">
+                  <ion-label color="grey">
+                    {{audio.getNome()}}
+                  </ion-label>
+                  <button ion-button color="nerus" item-right (click)="removerAudio(audio.getNome())">
+                      <ion-icon color="dark" name="trash"></ion-icon>
+                  </button>
+                </ion-item>
+            </ion-item-group>
+          </ion-list>
+        </div>
+
+        <div *ngSwitchCase="'intervalo'">
+            <ion-label color="nerus" *ngIf="audios.length ==0"> Nenhum audio adicionado</ion-label>
+            <ion-list *ngFor="let audio of audios">
+                <ion-item color="dark">
+                  <ion-label color="grey" stacked>
+                    {{audio.getNome()}}
+                  </ion-label>
+                  <ion-range pin = "true"[(ngModel)]="audio.intervalo" min="20" max="900" color="nerus"></ion-range>
+                </ion-item>
+            </ion-list>
+        </div>
+        <ion-item color="dark">
+            <ion-label color="ON" id="alignCenter">
+              {{playList.getCodigo()}}
+            </ion-label>
+            <button ion-button clear large item-right (click)="playList.gerarCodigo()">
+              <ion-icon name="refresh-circle" color= "nerus"></ion-icon>
+            </button>
+        </ion-item>
+    </ion-card-content>
   </ion-card>
+
 
 </ion-content>

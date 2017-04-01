@@ -2,12 +2,11 @@ export class Audios{
     private nome:string;
     private path:string;
     private intervalo:number;
-    private mestre:boolean;
 
     constructor(){
       this.nome = "";
       this.path = "";
-      this.intervalo = 0;
+      this.intervalo = 20;
     }
 
 //sets
@@ -21,9 +20,6 @@ export class Audios{
       this.intervalo = intervalo;
     }
 
-    public setMestre(mestre:boolean){
-      this.mestre =  mestre;
-    }
 
 //gets
     public getNome(){
@@ -36,9 +32,6 @@ export class Audios{
       return this.intervalo;
     }
 
-    public getMestre(){
-      return this.mestre;
-    }
 
 //outros Metodos
 

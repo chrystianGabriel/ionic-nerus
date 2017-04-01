@@ -14,43 +14,76 @@
 
 
 <ion-content padding id="pageBackColor">
-  <ion-card color ="dark">
-    <ion-card-header color ="dark">
-      <ion-item color ="dark">
-        <ion-label id = "alignCenter" color="nerus"><h1>Cadastrar Audios</h1></ion-label>
-     </ion-item>
-     <ion-label id="Divisao">-</ion-label>
+  <ion-card color="dark">
+    <ion-card-header>
+        <ion-title id="alignCenter">
+          <ion-label color="nerus">Audios</ion-label>
+        </ion-title>
+        <ion-label id="Divisao">-</ion-label>
+        <ion-segment [(ngModel)]="opAudios">
+
+          <ion-segment-button value="check">
+            <ion-icon name="checkmark-circle" color="ON"></ion-icon>
+          </ion-segment-button>
+
+          <ion-segment-button value="ordem">
+            <ion-icon name="reorder" color="ON"></ion-icon>
+          </ion-segment-button>
+
+          <ion-segment-button value="intervalo">
+            <ion-icon name="pulse" color="ON"></ion-icon>
+          </ion-segment-button>
+
+          <ion-segment-button value="dropbox" (click)="getAudios()">
+            <ion-icon name="logo-dropbox" color="ON"></ion-icon>
+          </ion-segment-button>
+
+        </ion-segment>
     </ion-card-header>
-    <ion-card-content color = "dark">
-    <ion-slides>
-      <ion-slide>
-        <ion-list>
-          <ion-item-group reorder="true" (ionItemReorder)="mudarOrdem($event)">
-            <ion-item color = "dark" *ngFor = "let audio of audios">
-              <ion-label color="grey">{{audio.getNome()}}</ion-label>
-              <button ion-button item-right color="nerus" (click)="removerAudio(audio.getNome())"><ion-icon name="trash" color="dark"></ion-icon></button>
-              <ion-toggle color="nerus" item-right (click)="setAudioMestre(audio)"></ion-toggle>
-            </ion-item>
-          </ion-item-group>
-        </ion-list>
-          <ion-label color="nerus"><b>Arraste para Editar Intervalo</b></ion-label>
-      </ion-slide>
-      <ion-slide>
-        <ion-label color="nerus" *ngIf="audios.length == 0">Nenhum audio adicionado</ion-label>
-          <ion-list *ngFor = "let audio of audios">
-            <ion-item color = "dark">
-              <ion-range pin="true" color="nerus"  min = "0" max = "900"[(ngModel)]="audio.intervalo"></ion-range>
-              <ion-label color="ON" stacked>{{audio.getNome()}}</ion-label>
-            </ion-item>
+
+    <ion-card-content [ngSwitch]="opAudios">
+        <div *ngSwitchCase="'check'">
+            <ion-label color="nerus" *ngIf="audios.length ==0"> Nenhum audio adicionado</ion-label>
+            <ion-list *ngFor="let audio of audios">
+                <ion-item color="dark">
+                  <ion-label color="grey">
+                    {{audio.getNome()}}
+                  </ion-label>
+                </ion-item>
+            </ion-list>
+        </div>
+
+        <div *ngSwitchCase = "'ordem'">
+          <ion-label color="nerus" *ngIf="audios.length ==0"> Nenhum audio adicionado</ion-label>
+          <ion-list>
+            <ion-item-group reorder="true" (ionItemReorder)="mudarOrdem($event)">
+                <ion-item color="dark" *ngFor="let audio of audios">
+                  <ion-label color="grey">
+                    {{audio.getNome()}}
+                  </ion-label>
+                  <button ion-button color="nerus" item-right (click)="removerAudio(audio.getNome())">
+                      <ion-icon color="dark" name="trash"></ion-icon>
+                  </button>
+                </ion-item>
+            </ion-item-group>
           </ion-list>
-      </ion-slide>
-    </ion-slides>
+        </div>
+
+        <div *ngSwitchCase="'intervalo'">
+            <ion-label color="nerus" *ngIf="audios.length ==0"> Nenhum audio adicionado</ion-label>
+            <ion-list *ngFor="let audio of audios">
+                <ion-item color="dark">
+                  <ion-label color="grey" stacked>
+                    {{audio.getNome()}}
+                  </ion-label>
+                  <ion-range pin = "true"[(ngModel)]="audio.intervalo" min="20" max="900" color="nerus"></ion-range>
+                </ion-item>
+            </ion-list>
+        </div>
+
     </ion-card-content>
   </ion-card>
-    <button ion-button item-right color="dark" full large (click)="getAudios()">
-      <ion-icon name="cloud-download" color="nerus"></ion-icon>
-    </button>
-    <button ion-button item-right color="dark" full large (click)="setAudios()">
+    <button ion-button color="dark" full large (click)="setAudios()">
       <ion-icon name="checkmark-circle" color="nerus"></ion-icon>
     </button>
 </ion-content>

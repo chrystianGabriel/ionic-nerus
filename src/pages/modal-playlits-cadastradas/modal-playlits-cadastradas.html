@@ -10,6 +10,13 @@
 
 
   <ion-content padding id="pageBackColor">
+    <ion-fab right bottom>
+      <button ion-fab color="nerus" (click)="modalCadastrarPlayList()">
+        <ion-icon name="add" color="dark">
+        </ion-icon>
+      </button>
+    </ion-fab>
+    
     <ion-list *ngFor="let playList of playLists">
       <ion-card>
       <ion-item color="dark">
